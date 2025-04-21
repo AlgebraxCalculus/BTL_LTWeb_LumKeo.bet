@@ -13,6 +13,15 @@ const UserController = {
 
   async login(req, res) {
     try {
+      // Handle GET requests
+      if (req.method === 'GET') {
+        return res.status(200).json({ 
+          success: true,
+          message: 'Login page. Please use POST method with username and password to login.' 
+        });
+      }
+      
+      // Handle POST requests
       const { username, password } = req.body;
       const result = await UserService.loginUser({ username, password });
       res.status(200).json(result);

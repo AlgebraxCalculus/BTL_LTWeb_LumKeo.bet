@@ -4,9 +4,16 @@ const UserController = require('../controllers/userController');
 const authMiddleware = require('../middlewares/authMiddleware');
 const upload = require('../middlewares/fileUpload');
 
+// Root endpoint
+router.get('/', (req, res) => {
+    res.json({ message: 'User API is working' });
+});
+
 // Các API không yêu cầu phân quyền
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
+// Add GET route for login to handle GET requests
+router.get('/login', UserController.login);
 router.post('/reset-password', UserController.resetPassword);
 
 // Các API yêu cầu quyền admin
